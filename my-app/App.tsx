@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { PaperProvider, Button, Portal, Dialog, Paragraph } from 'react-native-paper';
 
 export default function App() {
@@ -16,14 +16,32 @@ export default function App() {
 
   return (
     <PaperProvider>
-      <ScrollView style={{ flex: 1, backgroundColor: '#f2f2f2', padding: 16 }}>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f2f2f2',
+          padding: 24,
+        }}
+      >
+        <View style={{ alignItems: 'center', marginBottom: 40 }}>
+          <Text style={{ fontSize: 18, color: '#555' }}>Current Count</Text>
+          <Text
+            style={{
+              fontSize: 80,
+              fontWeight: 'bold',
+              color: '#3f51b5',
+              marginTop: 10,
+            }}
+          >
+            {count}
+          </Text>
+        </View>
+
         <Button mode="contained" onPress={showDialog}>
           Add 1 to Count
         </Button>
-
-        <Text style={{ marginTop: 20, fontSize: 24 }}>
-          Count: {count}
-        </Text>
 
         <Portal>
           <Dialog visible={visible} onDismiss={hideDialog}>
