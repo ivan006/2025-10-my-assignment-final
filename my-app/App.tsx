@@ -1,12 +1,18 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { PaperProvider, Button, Portal, Dialog, Paragraph } from 'react-native-paper';
 
 export default function App() {
   const [visible, setVisible] = React.useState(false);
+  const [count, setCount] = React.useState(0);
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+
+  const addToCount = () => {
+    setCount(count + 1);
+    hideDialog();
+  };
 
   return (
     <PaperProvider>
@@ -14,6 +20,10 @@ export default function App() {
         <Button mode="contained" onPress={showDialog}>
           Add 1 to Count
         </Button>
+
+        <Text style={{ marginTop: 20, fontSize: 24 }}>
+          Count: {count}
+        </Text>
 
         <Portal>
           <Dialog visible={visible} onDismiss={hideDialog}>
@@ -23,7 +33,7 @@ export default function App() {
             </Dialog.Content>
             <Dialog.Actions>
               <Button onPress={hideDialog}>Cancel</Button>
-              <Button onPress={hideDialog}>Yes</Button>
+              <Button onPress={addToCount}>Yes</Button>
             </Dialog.Actions>
           </Dialog>
         </Portal>
